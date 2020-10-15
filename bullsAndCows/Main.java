@@ -6,10 +6,17 @@ public class Main {
 	static Scanner sc = new Scanner(System.in);
 	
 	public static void main(String[] args) {
+		int nbr = sc.nextInt();
+		if(nbr <= 9)
+			System.out.println("The random secret number is " + randNumber(nbr) + ".");
+		else
+			System.out.println("Error: can't generate a secret number with a length of " + nbr + " because there aren't enough unique digits.");
+		/*
 		String secretCode = "9305";
 		String input = sc.nextLine();
 		String res = bullCow(secretCode, input);
 		System.out.println("Gradle: " + res + " The secret code is " + secretCode + ".");
+		*/
 	}
 	
 	static String bullCow(String secretCode, String input) {
@@ -40,5 +47,19 @@ public class Main {
 		if(bull == 0 && cow == 0)
 			return "None.";
 		return res1 + " and " + res2 + ".";
+	}
+
+	static String randNumber(int n) {
+		while(true) {
+			String res = "";
+			long val = System.nanoTime();
+			while(val / 10 != 0) {
+				if(!res.contains(String.valueOf(val % 10)) && (val % 10 != 0)) 
+					res += String.valueOf(val % 10);
+				val /= 10;
+				if(res.length() == n)
+					return res;
+			}
+		}
 	}
 }
